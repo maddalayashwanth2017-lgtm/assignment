@@ -34,37 +34,6 @@ INSERT INTO products VALUES
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
--- 🔹 LIMIT (Top Results)
--- Get top 5 most expensive products
-
-
--- Get 3 cheapest products
-
-
-
--- 🔹 LIMIT + OFFSET (Pagination Concept)
--- Skip first 5 highest priced products and get next 5
-
-
--- Get 4 products starting from the 3rd cheapest product
-
-
--- -
-
-
 --  GROUP BY (Basic → Intermediate)
 -- Find total number of products in each category
 SELECT category, count(*) as total_products
@@ -160,29 +129,24 @@ select* from products
 
 
 
+
+
 -- 🔹 GROUP BY + HAVING + ORDER BY (Important)
-
-
 -- Show categories with avg price > 40,000 and sort highest first
-
-
--- Count products per brand, show only brands with count ≥ 2, sort by count desc
-
-
--- Find brands with total stock > 30 and sort by stock descending
 SELECT brand , SUM(stock) as stock_avil
 FROM products
 GROUP BY brand
 HAVING stock_avil>30
 ORDER BY stock_avil DESC
 
-
+-- Count products per brand, show only brands with count ≥ 2, sort by count desc
 SELECT category,AVG(price) as avg_price
 FROM products
 GROUP BY category
 HAVING avg_price>40000
 ORDER BY avg_price DESC
 
+-- Find brands with total stock > 30 and sort by stock descending
 SELECT brand ,count(product_id) as total_products
 FROM products
 GROUP BY brand
@@ -190,25 +154,34 @@ HAVING total_products>=2
 ORDER BY total_products DESC
 
 
+
+
+-- 🔹 LIMIT (Top Results)
+-- Get top 5 most expensive products
 SELECT product_name , max(price) as expensive_products
 FROM products
 GROUP BY product_name
 ORDER BY expensive_products DESC
 LIMIT 5
 
+
+-- Get 3 cheapest products
 SELECT product_name , min(price) as cheap_products
 FROM products
 GROUP BY product_name
 ORDER BY cheap_products ASC
 LIMIT 3
 
+
+-- 🔹 LIMIT + OFFSET (Pagination Concept)
+-- Skip first 5 highest priced products and get next 5
 SELECT product_name , max(price) as expensive_products
 FROM products
 GROUP BY product_name
 ORDER BY expensive_products DESC
 LIMIT 5 OFFSET 5
 
-
+-- Get 4 products starting from the 3rd cheapest product
 SELECT product_name , min(price) as cheap_products
 FROM products
 GROUP BY product_name
