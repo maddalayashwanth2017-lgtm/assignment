@@ -22,24 +22,40 @@ Gmail VARCHAR(50) NOT NULL
 
 
 
+# def dashbord(student):
+#     print("1 to edti your profile: ")
+#     print("2 to delete your profile: ")
+#     print("3 to View your profile: ")
+
+#     x=input("chose one option from above: ")
+
+#     def editprofile():
+        
+
+
+    
+    
 
 
 
 
+    
 
 
 
 def login():
-    query_login="SELECT* FROM students"
-    curobj.fetchall()
+    query_login="SELECT Name,Gmail FROM students"
     curobj.execute(query_login)
+    verify=curobj.fetchall()
     name_login=input("enter your name: ")
     gmail_login=input("enter your gmail: ")
-    if name_login == gmail_login:
-        print("logged in successfully")
-    else:
-        print("invalid credentials")
-    
+    for Name,Gmail in verify:
+        if name_login==Name and gmail_login==Gmail:
+            print("logged in successfully")
+            dashbord()
+        else:
+            print("invalid credentials")
+
 
 
 
@@ -49,6 +65,7 @@ def register():
     age=int(input("enter your age: "))
     password=input("enter your password: ")
     c_password=input("enter your password again: ")
+    verify=curobj.fetchall()
 
     if password==c_password:
         query="INSERT INTO students(Name,Age,Gmail) VALUES(%s,%s,%s)"
@@ -56,16 +73,14 @@ def register():
         curobj.execute(query,data)
         db_connection.commit()
         print(f"Hello! {name} your are registered successfully")
-        login()
-
     else:
         print("re-enter your password: ")
-register()
+
 
 print("1.Register")
 print("2.login")
 
-a=input("Enter 1 to Register n\Enter 2 to lopgin: ")
+a=input("Enter 1 to Register \nEnter 2 to login: ")
 
 if a == "1":
     register()
