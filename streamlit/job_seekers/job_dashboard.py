@@ -108,7 +108,7 @@ elif menu == "View Candidates":
         mime="text/csv"
     )
 
-    delete_email = st.text_input(...)
+    delete_email = st.text_input("Enter Email to delete candidate")
 
     if st.button("Delete Candidate"):
 
@@ -149,3 +149,4 @@ elif menu == "Search Candidates":
         ]
 
     st.dataframe(filtered_data)
+    
