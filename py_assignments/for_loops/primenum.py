@@ -4,8 +4,8 @@ if num>1:
         if num%i == 0:
             print("non pime")
             break
-    
-    print("prime")
+    else:
+        print("prime")
          
 else:
     print("enter num larger than 1")
